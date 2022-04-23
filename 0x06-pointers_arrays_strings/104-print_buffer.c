@@ -1,103 +1,85 @@
 #include "main.h"
 
+#include <stdio.h>
+
+
+
 /**
  *
- * *print_buffer -  C function that prints the content of an
+ *  * print_buffer - prints a buffer
  *
- * *  inputted number of bytes from a buffer.
+ *   * @b: buffer.
  *
- * * Prints 10 bytes per line.
+ *    * @size: size of buffer.
  *
- * * Starts with the position of the first byte in hexadecimal (8 chars),
+ *     * Return: no return.
  *
- * * starting with `0`.
- *
- * * Each line shows the hexadecimal content (2 chars) of the buffer,
- *
- * * 2 bytes at a time, separated by a space.
- *
- * * Each line shows the content of the buffer.
- *
- * * Prints the byte if it is printable; if not, prints `.`.
- *
- * * Each line ends with a new line `\n`.
- *
- * * If the inputted byte size is 0 or less, the function only prints a new line.
- *
- * *@b: number of bytes
- *
- * *@size: size of the byte
- *
- * */
+ *      */
 
 void print_buffer(char *b, int size)
 
 {
 
-		int i = 0, j;
+		int j, k, l;
 
 
 
-			if (size < 0)
+			if (size <= 0)
 
-					{
+						printf("\n");
 
-								printf('\n');
-
-										return;
-
-											}
-
-
-
-				while (i < size)
+				else
 
 						{
 
-									if (i % 10 == 0)
+									for (j = 0; j < size; j += 10)
 
-													printf("%08x: ", i);
+												{
 
-											for (j = i; j < i + 9; j += 2)
+																printf("%.8x:", j);
 
-														{
+																			for (k = j; k < j + 10; k++)
 
-																		if ((j < size) && ((j + 1) < size))
+																							{
 
-																							printf("%02x%02x: ", b[j], b[j + 1]);
-
-																					else
-
-																									{
-
-																														while (++j <= i + 10)
-
-																																				printf(" ");
+																												if (k % 2 == 0)
 
 																																		printf(" ");
 
-																																					}
+																																if (k < size)
 
-																							}
+																																						printf("%.2x", *(b + k));
 
-													for (j = i; j < i + 9 && j < size; j++)
+																																				else
 
-																{
+																																										printf("  ");
 
-																				if (b[j] >= 32 && b[j] <= 126)
+																																							}
 
-																									printf("%c", b[j]);
+																						printf(" ");
 
-																							else
+																									for (l = j; l < j + 10; l++)
 
-																												printf(".");
+																													{
 
-																									}
+																																		if (l >= size)
 
-															printf('\n');
+																																								break;
 
-																	i += 10;
+																																						if (*(b + l) < 32 || *(b + l) > 126)
 
-																		}
+																																												printf("%c", '.');
+
+																																										else
+
+																																																printf("%c", *(b + l));
+
+																																													}
+
+																												printf("\n");
+
+																														}
+
+										}
 
 }
