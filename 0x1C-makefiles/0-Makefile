@@ -1,0 +1,4 @@
+#makefile task 0
+
+all: #this is the file the binary will be stored in
+	gcc main.c holberton.c -o holberton

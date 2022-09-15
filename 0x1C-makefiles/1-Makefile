@@ -1,0 +1,7 @@
+#task 1 for makefile
+
+CC=gcc #compiler to be used
+SRC=main.c holberton.c #files to be compiled
+
+all:
+	$(CC) $(SRC) -o holberton
